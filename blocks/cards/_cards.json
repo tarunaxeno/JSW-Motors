@@ -1,0 +1,105 @@
+{
+  "definitions": [
+    {
+      "title": "Cards",
+      "id": "cards",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Cards",
+              "model": "cards",
+              "filter": "cards"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Card",
+      "id": "card",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Card",
+              "model": "card"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "cards",
+      "fields": [
+        {
+          "component": "select",
+          "name": "classes",
+          "label": "Style",
+          "description": "Carousel auto-rotates; recommended: 6 to 12 cards. Timeline: 6 to 10 cards. Pillars: up to 6 cards, JPG or PNG images only. Roller: 3 to 6 cards, one per scroll step.",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "Carousel", "value": "carousel" },
+            { "name": "Timeline", "value": "timeline" },
+            { "name": "Pillars", "value": "pillars" },
+            { "name": "Roller", "value": "roller" },
+            { "name": "Rail", "value": "rail" },
+            { "name": "Features", "value": "features" }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "classes_pillars",
+          "label": "Pillars layout",
+          "description": "Pillars only: vertical or horizontal image transition on scroll.",
+          "value": "pillar-vertical",
+          "options": [
+            { "name": "Pillar Vertical", "value": "pillar-vertical" },
+            { "name": "Pillar Horizontal", "value": "pillar-horizontal" }
+          ],
+          "condition": { "===": [{ "var": "classes" }, "pillars"] }
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "required": true,
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image Alt Text",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "description": "Pillars: 1. Label 2. Heading 3. Description, opening words in bold. Timeline: 1. Title as a heading, 2. Description 3. Location in italics. Roller: 1. Title as a heading 2. Description. Carousel in a Product Page section: 1. Label 2. Title as a heading 3. Description 4. Link. Features: 1. Title as a heading (or in bold for a stat tile, e.g. 590 Nm) 2. Short line 3. and on: the detail, shown with the image when the card is opened (a heading first is the detail title).",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "cards",
+      "components": [
+        "card"
+      ]
+    }
+  ]
+}
